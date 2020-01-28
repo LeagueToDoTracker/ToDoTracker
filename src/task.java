@@ -19,4 +19,7 @@ public class task {
     public ArrayList getSubtasks(){
         return this.subtasks;
     }
+    public task getTask(int i) {
+    	return subtasks.get(i);
+    }
 }

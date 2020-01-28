@@ -14,7 +14,8 @@ public class Screen {
         if (i == JOptionPane.YES_OPTION) {
             s.add();
         }
-       
+        s.cont();
+        
     }
 
     void cont(){
@@ -22,15 +23,25 @@ public class Screen {
         JPanel p = new JPanel();
         JButton b = new JButton();*/
         String s = "";
+        String task = "";
         int i = JOptionPane.showConfirmDialog(null, "Do you want to add another task?");
         if(i ==  0){
             s = JOptionPane.showInputDialog("Which parent task?");
+            task = JOptionPane.showInputDialog("what task");
         }
+        System.out.println("task: " + s);
+        task t = new task();
+        t.setMainTaskName(task);
         for (int j = 0; j < goal.getSubtasks().size(); j++) {
-            if(goal.getSubtasks().get(j).toString().toLowerCase() == s.toLowerCase()){
-
+        	System.out.println(goal.getTask(j).getMainTaskNam().toLowerCase());
+            if(goal.getTask(j).getMainTaskNam().toLowerCase().equals(s.toLowerCase())){
+            	System.out.println("work");
+                goal.getTask(j).addTask(t);
+                System.out.println("Parent task: " + goal.getTask(j).getMainTaskNam());
+                System.out.println("Child task: " + task);
             }
         }
+        list();
     }
     void start() {
         goal.setMainTaskName(JOptionPane.showInputDialog("What's your task?"));
@@ -42,5 +53,13 @@ public class Screen {
         System.out.println(t.getMainTaskNam());
         goal.addTask(t);
 
+    }
+    void list() {
+    	for (int i = 0; i < goal.subtasks.size(); i++) {
+			System.out.println("Subtask: " + goal.getTask(i).getMainTaskNam());
+			for (int j = 0; j < goal.getTask(i).subtasks.size(); j++) {
+				System.out.println("Subtask of " + goal.getTask(i).getMainTaskNam()+ ": " + goal.getTask(i).getTask(j).getMainTaskNam());
+			}
+		}
     }
 }
